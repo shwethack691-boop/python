@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>All Grievances</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Tracking ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>File</th>
+        <th>Action</th>
+    </tr>
+
+    {% for g in grievances %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ g.tracking_id }}</td>
+        <td>{{ g.name }}</td>
+        <td>{{ g.category }}</td>
+        <td>
+            {% if g.status == 'Pending' %}
+                <span class="badge bg-warning text-dark">Pending</span>
+            {% else %}
+                <span class="badge bg-success">Resolved</span>
+            {% endif %}
+        </td>
+
+        <td>
+            {% if g.attachment %}
+                <a href="/uploads/{{ g.attachment }}" target="_blank">View File</a>
+            {% else %}
+                No file
+            {% endif %}
+        </td>
+
+        <td>
+            <a href="/update/{{ g.id }}" class="btn btn-warning btn-sm">Update</a>
+            <a href="/delete/{{ g.id }}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Delete this grievance?')">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

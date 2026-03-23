@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Reset Password</h2>
+
+<form method="POST" class="col-4">
+    <input type="password" class="form-control mb-2" name="password" placeholder="New Password" required>
+    <button class="btn btn-success">Reset</button>
+</form>
+
+{% endblock %}

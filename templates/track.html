@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Track Complaint</h2>
+
+<form method="POST" class="col-4">
+<input class="form-control mb-2" name="tracking_id" placeholder="Enter Tracking ID">
+<button class="btn btn-primary">Track</button>
+</form>
+
+{% if grievance %}
+<div class="card mt-3 p-3">
+<p><b>Status:</b> {{grievance.status}}</p>
+<p><b>Complaint:</b> {{grievance.grievance}}</p>
+</div>
+{% endif %}
+{% endblock %}

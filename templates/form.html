@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Submit Grievance</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<input class="form-control mb-2" name="name" placeholder="Name" required>
+<input class="form-control mb-2" name="email" placeholder="Email" required>
+<input class="form-control mb-2" name="phone" placeholder="Phone" required>
+<input class="form-control mb-2" name="location" placeholder="Location" required>
+
+<select class="form-control mb-2" name="category">
+<option>Water</option>
+<option>Electricity</option>
+<option>Road</option>
+<option>Sanitation</option>
+</select>
+
+<textarea class="form-control mb-2" name="grievance" placeholder="Enter complaint"></textarea>
+
+<input type="file" class="form-control mb-2" name="attachment">
+
+<button class="btn btn-primary">Submit</button>
+
+</form>
+{% endblock %}

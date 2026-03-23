@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Update Status</h2>
+
+<form method="POST" class="col-4">
+
+<select name="status" class="form-control mb-3">
+<option>Pending</option>
+<option>In Progress</option>
+<option>Resolved</option>
+</select>
+
+<button class="btn btn-success">Update</button>
+
+</form>
+{% endblock %}
