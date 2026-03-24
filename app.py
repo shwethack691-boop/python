@@ -17,19 +17,21 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 # ---------------- DATABASE ----------------
+# Use environment variables for security
 conn = mysql.connector.connect(
-    host="localhost",
-    user="flaskuser",
-    password="Flask@123",
-    database="grievance_db"
+    host=os.environ.get('DB_HOST'),        # e.g., sql123.freemysqlhosting.net
+    user=os.environ.get('DB_USER'),        # your DB username
+    password=os.environ.get('DB_PASSWORD'),# your DB password
+    database=os.environ.get('DB_NAME'),    # your DB name
+    port=3306
 )
 cursor = conn.cursor(dictionary=True, buffered=True)
 
 # ---------------- MAIL CONFIG ----------------
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'shwethack691@gmail.com'
-app.config['MAIL_PASSWORD'] = 'urlqfyfittoihfel'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')  # set in Render
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')  # set in Render
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 
@@ -219,7 +221,7 @@ def forgot():
 
             session['email'] = email
 
-            return redirect('/verify')   # ✅ FIXED
+            return redirect('/verify')
 
         flash("Email not found", "danger")
 
@@ -281,3 +283,7 @@ def uploaded_file(filename):
 def logout():
     session.clear()
     return redirect('/login')
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
